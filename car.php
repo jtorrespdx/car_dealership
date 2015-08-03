@@ -27,6 +27,13 @@
     $mercedes->miles = 37979;
 
     $cars = array($porsche, $ford, $lexus, $mercedes);
+
+    $cars_matching_search = array();
+    foreach ($cars as $car) {
+        if ($car->price < $_GET["price"]) {
+            array_push($cars_matching_search, $car);
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -36,19 +43,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Your Car Dealership</h1>
-    <ul>
-        <?php
-            foreach ($cars as $car) {
-                echo "<li> $car->make_model </li>";
-                echo "<ul>";
-                    echo "<li> $$car->price </li>";
-                    echo "<li> Miles: $car->miles </li>";
-                echo"</ul>";
+    <div class="container">
+        <h1>Your Car Dealership</h1>
+        <ul>
+            <?php
+                foreach ($cars_matching_search as $car) {
+                    echo "<li> $car->make_model </li>";
+                    echo "<ul>";
+                        echo "<li> $$car->price </li>";
+                        echo "<li> Miles: $car->miles </li>";
+                    echo"</ul>";
 
-            }
-        ?>
-    </ul>
-
+                }
+            ?>
+        </ul>
+    </div>
 </body>
 </html>
