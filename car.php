@@ -4,12 +4,14 @@
         private $make_model;
         private $make_price;
         private $make_miles;
+        public $make_photo;
 
-        function __construct($car_make, $car_price, $car_miles)
+        function __construct($car_make, $car_price, $car_miles, $car_photo)
         {
             $this->make_model = $car_make;
             $this->make_price = $car_price;
             $this->make_miles = $car_miles;
+            $this->make_photo = $car_photo;
         }
         function setMake($new_make)
         {
@@ -47,16 +49,16 @@
         }
     }
 
-    $porsche = new Car("2014 Porsche 911", 114991, 7861);
-    $ford = new Car("2011 Ford F450", 55995, 14241);
-    $lexus = new Car("2013 Lexus RX 350", 44700, 20000);
-    $mercedes = new Car("Mercedes Benz CLS550", 39900, 37979);
+    $porsche = new Car("2014 Porsche 911", 114991, 7861, "images/porsche.jpg");
+    $ford = new Car("2011 Ford F450", 55995, 14241, "images/ford.jpg");
+    $lexus = new Car("2013 Lexus RX 350", 44700, 20000, "images/lexus.jpg");
+    $mercedes = new Car("Mercedes Benz CLS550", 39900, 37979, "images/mercedes.jpg");
 
     $cars = array($porsche, $ford, $lexus, $mercedes);
 
     $cars_matching_search = array();
     foreach ($cars as $car) {
-        if ($car->worthBuying($_GET["price"])) {
+        if ($car->worthBuying($_GET["price"]) && ($car->worthBuying($_GET["miles"]))) {
             array_push($cars_matching_search, $car);
         }
     }
@@ -73,16 +75,21 @@
         <h1>Your Car Dealership</h1>
         <ul>
             <?php
-                foreach ($cars_matching_search as $car) {
-                    $car_make = $car->getMake();
-                    $car_price = $car->getPrice();
-                    $car_miles = $car->getMiles();
-                    echo "<li> $car_make </li>";
-                    echo "<ul>";
-                        echo "<li> $car_price </li>";
-                        echo "<li> Miles: $car_miles </li>";
-                    echo"</ul>";
+                if (empty($cars_matching_search)) {
+                    echo "Sorry, there are no cars available.";
+                } else {
+                    foreach ($cars_matching_search as $car) {
+                        $car_make = $car->getMake();
+                        $car_price = $car->getPrice();
+                        $car_miles = $car->getMiles();
+                        echo "<li><img src='$car->make_photo'></li>";
+                        echo "<li> $car_make </li>";
+                        echo "<ul>";
+                            echo "<li> $car_price </li>";
+                            echo "<li> Miles: $car_miles </li>";
+                        echo"</ul>";
 
+                    }
                 }
             ?>
         </ul>
