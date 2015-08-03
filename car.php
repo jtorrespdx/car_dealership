@@ -82,7 +82,7 @@
                         $car_make = $car->getMake();
                         $car_price = $car->getPrice();
                         $car_miles = $car->getMiles();
-                        echo "<li><img src='$car->make_photo'></li>";
+                        echo "<li><img class='img-rounded' src='$car->make_photo'></li>";
                         echo "<li> $car_make </li>";
                         echo "<ul>";
                             echo "<li> $car_price </li>";
