@@ -1,49 +1,55 @@
 <?php
     class Car
     {
-        public $make_model;
-        public $price;
-        public $miles;
+        private $make_model;
+        private $make_price;
+        private $make_miles;
 
         function __construct($car_make, $car_price, $car_miles)
         {
             $this->make_model = $car_make;
-            $this->price = $car_price;
-            $this->miles = $car_miles;
+            $this->make_price = $car_price;
+            $this->make_miles = $car_miles;
+        }
+        function setMake($new_make)
+        {
+            $model = (string) $new_make;
+        }
+
+        function getMake()
+        {
+            return $this->make_model;
+        }
+
+        function setPrice($new_price)
+        {
+            $price = (float) $new_price;
+        }
+
+        function getPrice()
+        {
+            return $this->make_price;
+        }
+
+        function setMiles($new_miles)
+        {
+            $miles = (float) $new_miles;
+        }
+
+        function getMiles()
+        {
+            return $this->make_miles;
         }
 
         function worthBuying($max_price)
         {
-            return $this->price < ($max_price + 100);
+            return $this->make_price < ($max_price + 100);
         }
     }
-    /*
-    $porsche = new Car();
-    $porsche->make_model = "2014 Porsche 911";
-    $porsche->price = 114991;
-    $porsche->miles = 7864;
-    */
+
     $porsche = new Car("2014 Porsche 911", 114991, 7861);
-    /*
-    $ford = new Car();
-    $ford->make_model = "2011 Ford F450";
-    $ford->price = 55995;
-    $ford->miles = 14241;
-    */
     $ford = new Car("2011 Ford F450", 55995, 14241);
-    /*
-    $lexus = new Car();
-    $lexus->make_model = "2013 Lexus RX 350";
-    $lexus->price = 44700;
-    $lexus->miles = 20000;
-    */
     $lexus = new Car("2013 Lexus RX 350", 44700, 20000);
-    /*
-    $mercedes = new Car();
-    $mercedes->make_model = "Mercedes Benz CLS550";
-    $mercedes->price = 39900;
-    $mercedes->miles = 37979;
-    */
     $mercedes = new Car("Mercedes Benz CLS550", 39900, 37979);
 
     $cars = array($porsche, $ford, $lexus, $mercedes);
@@ -68,10 +74,13 @@
         <ul>
             <?php
                 foreach ($cars_matching_search as $car) {
-                    echo "<li> $car->make_model </li>";
+                    $car_make = $car->getMake();
+                    $car_price = $car->getPrice();
+                    $car_miles = $car->getMiles();
+                    echo "<li> $car_make </li>";
                     echo "<ul>";
-                        echo "<li> $$car->price </li>";
-                        echo "<li> Miles: $car->miles </li>";
+                        echo "<li> $car_price </li>";
+                        echo "<li> Miles: $car_miles </li>";
                     echo"</ul>";
 
                 }
