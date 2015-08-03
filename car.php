@@ -32,10 +32,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Your Car Dealership's Homepage</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
+    <h1>Your Car Dealership</h1>
+    <ul>
+        <?php
+            foreach ($cars as $car) {
+                echo "<li> $car->make_model </li>";
+                echo "<ul>";
+                    echo "<li> $$car->price </li>";
+                    echo "<li> Miles: $car->miles </li>";
+                echo"</ul>";
+
+            }
+        ?>
+    </ul>
 
 </body>
 </html>
